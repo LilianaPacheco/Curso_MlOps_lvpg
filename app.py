@@ -6,7 +6,8 @@ import plotly.graph_objs as go
 import numpy as np
 import pandas as pd
 import datetime as dt
-
+import sys
+from pathlib import Path
 
 
 app = dash.Dash(
@@ -22,7 +23,13 @@ app.config.suppress_callback_exceptions = True
 # Load data from csv
 def load_data():
     # To do: Completar la función 
-    
+    path_file = str(Path().absolute())
+    data = pd.read_csv(path_file +'\datos_energia.csv', sep = ',')
+    # data['time'] = pd.to_datetime(data['time'])
+    data.index = pd.to_datetime(data['time']) 
+    return data
+
+
 
 # Cargar datos
 data = load_data()
